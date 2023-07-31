@@ -104,14 +104,12 @@ void SpaceGame::Update(float dt) {
                 randomf(10.0f, 20.0f),
                 DegToRad(270.0f),
                 Transform{
-                    {randomf((float) g_renderer.GetWidth()), (float) randomf(g_renderer.GetHeight()) },
-                    randomf(kiko::TwoPi),
-                    2
+                    {random(g_renderer.GetWidth()), random(g_renderer.GetHeight()) }, randomf(kiko::TwoPi), 2
                 },
                 g_manager.Get("enemy.txt"),
-                randomf(1, 2),
+                randomf(1.0f, 2.0f),
                 "Enemy",
-                .95f
+                0.95f
                 ));
 
         }
