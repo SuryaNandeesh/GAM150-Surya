@@ -9,11 +9,14 @@
 #include "SpaceGame.h"
 
 #include <thread>
+#include "Player.h"
 
 using namespace std;
 using namespace kiko;
 
 int main(int argc, char* argv[]) {
+
+    INFO_LOG;
 
     MemoryTracker::Initialize();
 
