@@ -5,6 +5,7 @@
 #include "Renderer/Renderer.h"
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
+#include "Renderer/Texture.h"
 
 #include "SpaceGame.h"
 
@@ -16,7 +17,7 @@ using namespace kiko;
 
 int main(int argc, char* argv[]) {
 
-    INFO_LOG;
+    INFO_LOG("hallo! i am emu otori");
 
     MemoryTracker::Initialize();
 
@@ -24,18 +25,26 @@ int main(int argc, char* argv[]) {
 
     //seeds random to make it constantly randomizing
     seedRandom((unsigned int)time(nullptr));
+
     //file location
     setFilePath("assets");
-    cout << getFilePath() << endl;
+    //cout << getFilePath() << endl;
+
     //creation of window
     g_renderer.Initialize();
     g_renderer.CreateWindow("CSC196", 800, 600);
+
     //creates input system
     g_inputSystem.Initialize();
     g_audioSystem.Initialize();
+
     //creates the game itself
     unique_ptr<SpaceGame> game = make_unique<SpaceGame>();
     game->Initialize();
+
+    // create texture
+    shared_ptr<kiko::Texture> texture = make_shared<kiko::Texture>();
+    texture->Create(g_renderer, "garflied.jpg");
 
     bool quit = false;
     while (!quit) {
@@ -55,6 +64,8 @@ int main(int argc, char* argv[]) {
 
         g_renderer.SetColor(0, 0, 0, 0);
         g_renderer.BeginFrame();
+
+        kiko::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 
         game->Draw(g_renderer);
 
