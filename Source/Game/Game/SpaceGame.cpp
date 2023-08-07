@@ -10,6 +10,8 @@
 #include "Renderer/Renderer.h"
 #include "Renderer/ModelManager.h"
 #include "Renderer/ParticleSystem.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/SpriteComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
@@ -18,16 +20,19 @@
 using namespace kiko;
 
 bool SpaceGame::Initialize() {
-
+    //make font
     m_font = std::make_shared<Font>("ARCADECLASSIC.ttf", 24);
 
-	m_scoreText = std::make_unique<Text>(m_font);
+	m_scoreText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+	//m_scoreText = std::make_unique<kiko::Text>(m_font);
     m_scoreText->Create(kiko::g_renderer, "SCORE ", kiko::Color{ 28, 163, 39, 1 });
 
-	m_livesText = std::make_unique<Text>(m_font);
+    m_livesText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+    //m_livesText = std::make_unique<kiko::Text>(m_font);
     m_livesText->Create(kiko::g_renderer, "LIVES ", kiko::Color{ 207, 34, 25, 1 });
 
-    m_titleText = std::make_unique<Text>(m_font);
+    m_titleText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+    //m_titleText = std::make_unique<kiko::Text>(m_font);
     m_titleText->Create(kiko::g_renderer, "ASTEROID", kiko::Color{ 1, 1, 1, 1 });
 
 	g_audioSystem.AddAudio("laser", "laser.wav");
@@ -83,6 +88,11 @@ void SpaceGame::Update(float dt) {
             0.95f
         );
         player->m_game = this;
+        // create components
+        std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
+        component->m_texture = kiko::g_resources.Get<kiko::Texture>("ship.png", kiko::g_renderer);
+        player->AddComponent(std::move(component));
+
         m_scene->Add(std::move(player));
     }
 

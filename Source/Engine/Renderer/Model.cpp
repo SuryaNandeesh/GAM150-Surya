@@ -61,4 +61,9 @@ namespace kiko{
 
 	}
 
+	bool Model::Create(std::string filename, ...)
+	{
+		return Load(filename);
+	}
+
 }

@@ -19,6 +19,21 @@
     <ClInclude Include="Emitter.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Component.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteComponent.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -28,6 +43,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Emitter.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\ResourceManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Resource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

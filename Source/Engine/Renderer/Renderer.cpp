@@ -93,7 +93,7 @@ namespace kiko {
     void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
     {
         vec2 size = texture->GetSize();
-        SDL_Rect dest;
+        SDL_Rect dest{};
         dest.x = x;
         dest.y = y;
         dest.w = 200;

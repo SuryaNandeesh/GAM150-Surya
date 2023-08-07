@@ -7,6 +7,7 @@
 #include "Input/InputSystem.h"
 #include "Renderer/Texture.h"
 
+#include "Framework/Resource/ResourceManager.h"
 #include "SpaceGame.h"
 
 #include <thread>
@@ -14,6 +15,18 @@
 
 using namespace std;
 using namespace kiko;
+
+void print_arg(int count, ...) {
+    va_list args;
+    va_start(args, count);
+    for (int i = 0; i < count; ++i)
+    {
+        std::cout << va_arg(args, const char*) << std::endl;
+    }
+    va_end(args);
+}
+
+
 
 int main(int argc, char* argv[]) {
 
@@ -42,9 +55,10 @@ int main(int argc, char* argv[]) {
     unique_ptr<SpaceGame> game = make_unique<SpaceGame>();
     game->Initialize();
 
+
     // create texture
-    shared_ptr<kiko::Texture> texture = make_shared<kiko::Texture>();
-    texture->Create(g_renderer, "garflied.jpg");
+    kiko::res_t<kiko::Texture> texture = kiko::g_resources.Get<kiko::Texture>("ship.png", kiko::g_renderer);
+    //texture->Load("garflied.jpg", g_renderer);
 
     bool quit = false;
     while (!quit) {

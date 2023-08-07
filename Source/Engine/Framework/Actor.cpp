@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Components/RenderComponent.h"
 
 namespace kiko {
 	
@@ -19,7 +20,24 @@ namespace kiko {
 
 	void Actor::Draw(kiko::Renderer& renderer) {
 
-		m_model->Draw(renderer, GetTransform());
+		//if(m_model) m_model->Draw(renderer, m_transform);
+		for (auto& compontent : m_components)
+		{
+			if (dynamic_cast<RenderComponent*>(compontent.get()))
+			{
+				RenderComponent* renderComponent = dynamic_cast<RenderComponent*>(compontent.get());
+				if (renderComponent) {
+					renderComponent->Draw(renderer);
+				}
+			}
+		}
+
+	}
+
+	void Actor::AddComponent(std::unique_ptr<Component> component)
+	{
+		component->m_owner = this;
+		m_components.push_back(std::move(component));
 
 	}
 
