@@ -1,8 +1,26 @@
 #include "Actor.h"
+#include "Object.h"
 #include "Components/RenderComponent.h"
+#include "Components/CollisionComponent.h"
 
 namespace kiko {
-	
+
+	CLASS_DEF(Actor)
+
+	bool Actor::Initialize()
+	{
+		for (auto& component : m_components) {
+			component->Initialize();
+		}
+
+		return true;
+	}
+	void Actor::OnDestroy()
+	{
+		for (auto& component : m_components) {
+			component->OnDestroy();
+		}
+	}
 	void Actor::Update(float dt){
 
 		if (m_lifespan != -1.0f)
@@ -13,8 +31,9 @@ namespace kiko {
 			
 		}
 
-		m_transform.position += m_velocity * dt;
-		m_velocity *= std::pow(1.0f - m_damping, dt);
+		for (auto& component : m_components) {
+			component->Update(dt);
+		}
 
 	}
 
@@ -40,6 +59,11 @@ namespace kiko {
 		m_components.push_back(std::move(component));
 
 	}
+	bool Actor::Read(const rapidjson::Value& value)
+	{
 
+
+		return true;
+	}
 
 }

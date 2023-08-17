@@ -5,6 +5,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source\Component">
+      <UniqueIdentifier>{5eeae9d0-9308-4922-8d0a-7a1ba2d73fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource">
+      <UniqueIdentifier>{87768cc2-c15b-42ac-a67d-e4afa3c5346e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -19,19 +25,49 @@
     <ClInclude Include="Emitter.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Resource.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource\ResourceManager.h">
-      <Filter>Source</Filter>
+    <ClInclude Include="Components\EnginePhysicsComponent.h">
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Components\Component.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ModelRenderComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PhysicsComponent.h">
+      <Filter>Source\Component</Filter>
     </ClInclude>
     <ClInclude Include="Components\RenderComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteRenderComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\ResourceManager.h">
+      <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Components\SpriteComponent.h">
+    <ClInclude Include="Framework.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleCollisionComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,14 +81,26 @@
     <ClCompile Include="Emitter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\ResourceManager.cpp">
+    <ClCompile Include="Components\EnginePhysicsComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ModelRenderComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteRenderComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionComponent.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\Resource.cpp">
+    <ClCompile Include="Components\CircleCollisionComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Components\SpriteComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Framework.rc" />
   </ItemGroup>
 </Project>

@@ -6,32 +6,36 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Emitter.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/SpriteRenderComponent.h"
+#include <Framework/Components/ModelRenderComponent.h>
+#include "Framework/Components/EnginePhysicsComponent.h"
+#include <Framework/Components/CircleCollisionComponent.h>
 
 #include "Renderer/Renderer.h"
 #include "Renderer/ModelManager.h"
 #include "Renderer/ParticleSystem.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/SpriteComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 
-
 using namespace kiko;
 
 bool SpaceGame::Initialize() {
-    //make font
-    m_font = std::make_shared<Font>("ARCADECLASSIC.ttf", 24);
 
-	m_scoreText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+    //make font
+    //m_font = std::make_shared<Font>("ARCADECLASSIC.ttf", 24);
+    m_font = GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24);
+
+	m_scoreText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
 	//m_scoreText = std::make_unique<kiko::Text>(m_font);
     m_scoreText->Create(kiko::g_renderer, "SCORE ", kiko::Color{ 28, 163, 39, 1 });
 
-    m_livesText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+    m_livesText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
     //m_livesText = std::make_unique<kiko::Text>(m_font);
     m_livesText->Create(kiko::g_renderer, "LIVES ", kiko::Color{ 207, 34, 25, 1 });
 
-    m_titleText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("ARCADECLASSIC.ttf", 24));
+    m_titleText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
     //m_titleText = std::make_unique<kiko::Text>(m_font);
     m_titleText->Create(kiko::g_renderer, "ASTEROID", kiko::Color{ 1, 1, 1, 1 });
 
@@ -83,16 +87,26 @@ void SpaceGame::Update(float dt) {
             10.0f,
             DegToRad(270.0f),
             kiko::Transform{ {400, 300}, 0, 3 },
-            kiko::g_manager.Get("ship.txt"),
-            "Player",
-            0.95f
-        );
+            "Player"
+            );
         player->m_game = this;
         // create components
-        std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
-        component->m_texture = kiko::g_resources.Get<kiko::Texture>("ship.png", kiko::g_renderer);
-        player->AddComponent(std::move(component));
+        
+        auto renderComponent = CREATE_CLASS(SpriteRenderComponent);
+        renderComponent->m_texture = GET_RESOURCE(kiko::Texture, "ship.png", kiko::g_renderer);
+        player->AddComponent(std::move(renderComponent));
 
+        //physics
+        auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
+        physicsComponent->m_damping = 0.9f;
+        player->AddComponent(std::move(physicsComponent));
+
+        auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
+        collisionComponent->m_radius = 30.0f;
+        player->AddComponent(std::move(collisionComponent));
+
+
+        player->Initialize();
         m_scene->Add(std::move(player));
     }
 
@@ -116,10 +130,8 @@ void SpaceGame::Update(float dt) {
                 Transform{
                     {random(g_renderer.GetWidth()), random(g_renderer.GetHeight()) }, randomf(kiko::TwoPi), 2
                 },
-                g_manager.Get("enemy.txt"),
                 randomf(1.0f, 2.0f),
-                "Enemy",
-                0.95f
+                "Enemy"
                 ));
 
         }

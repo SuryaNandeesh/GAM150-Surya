@@ -93,13 +93,15 @@ namespace kiko {
     void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
     {
         vec2 size = texture->GetSize();
+
         SDL_Rect dest{};
-        dest.x = x;
-        dest.y = y;
-        dest.w = 200;
-        dest.h = 200;
+        dest.x = (int)(x - (size.x * 0.5f));
+        dest.y = (int)(y - (size.y * 0.5f));
+        dest.w = (int)size.x;
+        dest.h = (int)size.y;
+
         // https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
-        SDL_RenderCopyEx(m_renderer, texture->m_texture, NULL, NULL, angle, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
     }
 
 }

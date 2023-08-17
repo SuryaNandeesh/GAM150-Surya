@@ -4,8 +4,31 @@
 #include "Framework/Scene.h"
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
-
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/PhysicsComponent.h"
+#include "Renderer/Renderer.h"
 #include <memory>
+#include <Framework/Components/RenderComponent.h>
+#include <Framework/Components/CollisionComponent.h>
+
+bool Player::Initialize()
+{
+    Actor::Initialize();
+    //cache off
+    m_physicsComponent = GetComponent<kiko::PhysicsComponent>();
+    auto collisionComponent = GetComponent<kiko::CollisionComponent>();
+    if (collisionComponent) 
+    {
+        auto renderComponent = GetComponent<kiko::RenderComponent>();
+        if (renderComponent)
+        {
+            float scale = m_transform.scale;
+            collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+        }
+    }
+
+    return true;
+}
 
 void Player::Update(float dt) {
 
@@ -23,8 +46,13 @@ void Player::Update(float dt) {
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_S)) thrust = -1;
 
     kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
-    AddForce(forward * m_speed * thrust * ((sprint) ? 2.0f : 1.0f));
+    //AddForce(forward * m_speed * thrust * ((sprint) ? 2.0f : 1.0f));
+
+    //physics engine
+    auto physicsComponent = GetComponent<kiko::PhysicsComponent>();
+    physicsComponent->ApplyForce(forward * m_speed * thrust);
     
+    //wrap of screen
     m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
     m_transform.position.y = kiko::Wrap(m_transform.position.y, kiko::g_renderer.GetHeight());
 
@@ -37,12 +65,10 @@ void Player::Update(float dt) {
 
         std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(
             400.0f, 
-            kiko::Transform{m_transform.position, m_transform.rotation, 1}, 
-            m_model, 
+            kiko::Transform{m_transform.position, m_transform.rotation, 1.0f}, 
             GetTag(),
             10.0f, 
-            2.0f,
-            0.0f
+            2.0f
             );
 
         m_scene->Add(std::move(projectile));

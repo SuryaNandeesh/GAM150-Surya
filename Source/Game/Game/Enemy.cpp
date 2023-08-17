@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include "Renderer/Renderer.h"
 #include "Player.h"
 #include "Framework/Emitter.h"
 #include "Projectile.h"
@@ -52,12 +52,10 @@ void Enemy::Update(float dt) {
         std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(
             400.0f,
             kiko::Transform{ m_transform.position, m_transform.rotation, 1 },
-            m_model,
             GetTag(),
-            10,
-            2.0f,
-            0.0f
-            );
+            10.0f,
+            2.0f
+        );
         m_scene->Add(std::move(projectile));
 
     }
@@ -66,4 +64,5 @@ void Enemy::Update(float dt) {
 
 void Enemy::OnCollision(Actor* other)
 {
+
 }

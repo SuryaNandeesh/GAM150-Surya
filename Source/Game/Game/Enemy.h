@@ -5,8 +5,8 @@ class Enemy : public kiko::Actor {
 
 public:
 
-	Enemy(float health, float speed, float turnRate, const kiko::Transform& transform, std::shared_ptr<kiko::Model> model, float firerate, std::string tag, float damping) :
-		Actor{ transform, model, tag, health, damping },
+	Enemy(float health, float speed, float turnRate, const kiko::Transform& transform, float firerate, std::string tag) :
+		Actor{ transform, tag, health},
 		m_speed{ speed },
 		m_turnRate{ turnRate }
 	{

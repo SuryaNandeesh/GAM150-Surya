@@ -6,8 +6,8 @@ struct _TTF_Font;
 
 namespace kiko {
 	
-	class Font : public Resource {
-
+	class Font : public Resource 
+	{
 	public:
 
 		Font() = default;
@@ -22,8 +22,6 @@ namespace kiko {
 	private:
 
 		_TTF_Font* m_ttfFont = nullptr;
-	
-
 	};
 
 }

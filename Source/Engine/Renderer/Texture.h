@@ -3,6 +3,7 @@
 #include <Core/Vector2.h>
 
 struct SDL_Texture;
+
 namespace kiko
 {
 	class Texture : public Resource
@@ -14,7 +15,6 @@ namespace kiko
 		virtual bool Create(std::string filename, ...) override;
 
 		bool Load(std::string filename, class Renderer& renderer);
-
 		vec2 GetSize();
 
 		friend class Renderer;

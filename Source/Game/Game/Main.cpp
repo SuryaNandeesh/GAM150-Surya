@@ -1,17 +1,17 @@
 #include <iostream>
-
+#include <thread>
 #include "Core/Core.h"
-
+#include "SpaceGame.h"
+#include "Player.h"
+#include "Enemy.h"
 #include "Renderer/Renderer.h"
+#include "Renderer/Texture.h"
+#include "Renderer/Text.h"
+#include "Renderer/ModelManager.h"
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
-#include "Renderer/Texture.h"
-
-#include "Framework/Resource/ResourceManager.h"
-#include "SpaceGame.h"
-
-#include <thread>
-#include "Player.h"
+#include "Framework/Framework.h"
+#include "rapidjson/include/rapidjson/document.h"
 
 using namespace std;
 using namespace kiko;
@@ -30,18 +30,21 @@ void print_arg(int count, ...) {
 
 int main(int argc, char* argv[]) {
 
-    INFO_LOG("hallo! i am emu otori");
+    //kiko::Factory::Instance().Register<kiko::SpriteRenderComponent>("SpriteComponent");
 
+    INFO_LOG("Initializing the Engine...");
     MemoryTracker::Initialize();
-
-    /////Setup
 
     //seeds random to make it constantly randomizing
     seedRandom((unsigned int)time(nullptr));
 
     //file location
     setFilePath("assets");
-    //cout << getFilePath() << endl;
+    cout << getFilePath() << endl;
+
+    //JSON - json.txt
+    rapidjson::Document document;
+    kiko::Json::Load("json.txt", document);
 
     //creation of window
     g_renderer.Initialize();
@@ -57,7 +60,7 @@ int main(int argc, char* argv[]) {
 
 
     // create texture
-    kiko::res_t<kiko::Texture> texture = kiko::g_resources.Get<kiko::Texture>("ship.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> texture = GET_RESOURCE(kiko::Texture, "ship.png", kiko::g_renderer);
     //texture->Load("garflied.jpg", g_renderer);
 
     bool quit = false;
@@ -69,7 +72,7 @@ int main(int argc, char* argv[]) {
         //updates the audio and input every tick
         g_audioSystem.Update();
         g_inputSystem.Update();
-        
+
         if (g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) quit = true;
 
         game->Update(g_time.GetDeltaTime());
@@ -88,4 +91,4 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
-}
+};
