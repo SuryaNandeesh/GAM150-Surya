@@ -39,6 +39,7 @@ bool SpaceGame::Initialize() {
     //m_titleText = std::make_unique<kiko::Text>(m_font);
     m_titleText->Create(kiko::g_renderer, "ASTEROID", kiko::Color{ 1, 1, 1, 1 });
 
+    //audio bank
 	g_audioSystem.AddAudio("laser", "laser.wav");
 	g_audioSystem.AddAudio("death", "bwomp.wav");
 	g_audioSystem.AddAudio("Background Music", "08 Red Sun (Maniac Agenda Mix).mp3");
@@ -46,8 +47,10 @@ bool SpaceGame::Initialize() {
 	g_audioSystem.AddAudio("gameover", "gameover.mp3");
     kiko::g_audioSystem.Play("Background Music", true);
     
-
+    //create scene
     m_scene = std::make_unique<Scene>();
+    m_scene->Load("scene.json");
+    m_scene->Initialize();
 
 	return true;
 
@@ -55,7 +58,7 @@ bool SpaceGame::Initialize() {
 
 
 void SpaceGame::Shutdown() {
-
+    //empty
 }
 
 void SpaceGame::Update(float dt) {

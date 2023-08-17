@@ -104,4 +104,22 @@ namespace kiko {
         SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
     }
 
+    void Renderer::DrawTexture(Texture* texture, const Transform& transform) {
+
+        mat3 mx = transform.GetMatrix();
+
+        vec2 size = texture->GetSize() * mx.GetScale();
+        SDL_Rect dest;
+
+        vec2 position = mx.GetTranslation();
+
+        dest.x = (int)position.x - (size.x * .5);
+        dest.y = (int)position.y - (size.y * .5);
+        dest.w = size.x;
+        dest.h = size.y;
+
+        SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, RadToDeg(mx.GetRotation()), nullptr, SDL_FLIP_NONE);
+
+    }
+
 }

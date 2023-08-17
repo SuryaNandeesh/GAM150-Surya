@@ -44,7 +44,6 @@ void Enemy::Update(float dt) {
     m_transform.position += forward * m_speed * kiko::g_time.GetDeltaTime();
     m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
     m_transform.position.y = kiko::Wrap(m_transform.position.y, kiko::g_renderer.GetHeight());
-
     m_firetimer -= dt;
     if (m_firetimer <= 0) {
 
@@ -62,7 +61,4 @@ void Enemy::Update(float dt) {
 
 }
 
-void Enemy::OnCollision(Actor* other)
-{
-
-}
+void Enemy::OnCollision(Actor* other) {}

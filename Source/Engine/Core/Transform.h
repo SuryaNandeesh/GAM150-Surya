@@ -1,5 +1,6 @@
 #pragma once
-#include "Matrix22.h"
+#include "Json.h"
+#include "Matrix33.h"
 #include "Vector2.h"
 
 namespace kiko {
@@ -16,20 +17,24 @@ namespace kiko {
 	public:
 
 		Transform() = default;
-		Transform(const vec2& position, float rotation, float scale) :
+		Transform(const vec2& position, float rotation, float scale = 1) :
 			position{ position },
 			rotation{ rotation },
 			scale{ scale }
 		{}
-		mat2 GetMartix() const {
-			//ms = matrix scale and mr = matrix rotation
-			mat2 ms = mat2::CreateScale(scale);
-			mat2 mr = mat2::CreateRotation(rotation);
 
-			mat2 mx = ms * mr;
-			//mx = matrix times
+		mat3 GetMatrix() const {
+			//ms = matrix scale and mr = matrix rotation
+			mat3 ms = mat3::CreateScale(scale);
+			mat3 mr = mat3::CreateRotation(rotation);
+			mat3 mt = mat3::CreateTranslation(position);
+
+			mat3 mx = mt * ms * mr;
+
 			return mx;
 		}
+		void Read(const json_t& value);
+
 	};
 
 }

@@ -12,12 +12,11 @@ namespace kiko
 		Texture() = default;
 		~Texture();
 
-		virtual bool Create(std::string filename, ...) override;
-
 		bool Load(std::string filename, class Renderer& renderer);
 		vec2 GetSize();
 
 		friend class Renderer;
+		virtual bool Create(std::string filename, ...) override;
 
 	private:
 

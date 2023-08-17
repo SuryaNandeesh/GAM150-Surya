@@ -90,9 +90,6 @@
     <ClCompile Include="Components\SpriteRenderComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Components\CollisionComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Components\CircleCollisionComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>

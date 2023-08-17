@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Components\CircleCollisionComponent.cpp" />
-    <ClCompile Include="Components\CollisionComponent.cpp" />
     <ClCompile Include="Components\EnginePhysicsComponent.cpp" />
     <ClCompile Include="Components\ModelRenderComponent.cpp" />
     <ClCompile Include="Components\SpriteRenderComponent.cpp" />

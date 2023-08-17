@@ -7,6 +7,7 @@ namespace kiko
 	class PhysicsComponent : public Component
 	{
 	public:
+		virtual void Update(float dt) = 0;
 		virtual void ApplyForce(const vec2& force) = 0;
 		CLASS_DEF(PhysicsComponent)
 	public:

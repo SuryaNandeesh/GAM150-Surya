@@ -2,7 +2,12 @@
 #include "Framework/Components/CollisionComponent.h"
 
 namespace kiko {
+	bool Scene::Initialize()
+	{
+		for (auto actor : m_actors) actor->Initialize();
 
+		return true;
+	}
 	void Scene::Update(float dt) {
 
 		//update and remove destroyed actors
@@ -22,7 +27,7 @@ namespace kiko {
 				CollisionComponent* collision1 = (*iter1)->GetComponent<CollisionComponent>();
 				CollisionComponent* collision2 = (*iter2)->GetComponent<CollisionComponent>();
 
-				if (collision1 == nullptr || !collision2) continue;
+				if (!collision1 || !collision2) continue;
 
 				if (collision1->CheckCollision(collision2)){
 					(*iter1)->OnCollision(iter2->get());
@@ -55,6 +60,32 @@ namespace kiko {
 		m_actors.clear();
 
 	}
+
+	bool Scene::Load(const std::string& filename)
+	{
+		rapidjson::Document document;
+		if (!Json::Load(filename, document))
+		{
+			ERROR_LOG("Could not load scene file: " << filename);
+			return false;
+		}
+		Read(document);
+
+		return true;
+	}
+
+	void Scene::Read(const json_t& value)
+	{
+		// if(HAS_DATA(value, actors) && GET_DATA(value, actors).IsArray())
+		//{
+		//	for(auto & actorValue : GET_DATA(value, actors).GetArray())
+		//	{
+		//		std::string type;
+		//		READ_DATA(actorValue, type);
+
+		//		auto actor
+	}
+
 
 
 }
