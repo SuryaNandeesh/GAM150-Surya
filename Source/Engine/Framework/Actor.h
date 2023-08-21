@@ -12,19 +12,13 @@ namespace kiko {
 
 	public:
 
-		CLASS_DEC(Actor);
+		CLASS_DECLARATION(Actor);
 
 		Actor() = default;
-		/*Actor(const kiko::Transform& transform, std::string tag, float health, float lifespan = -1.0f) :
-			m_transform{ transform },
-			m_tag{ tag },
-			m_lifespan{ lifespan },
-			m_health{ health }
-		{}*/
-
 		Actor(const kiko::Transform& transform) :
 			m_transform{ transform }
 		{}
+		Actor(const Actor& other);
 
 		virtual bool Initialize() override;
 		virtual void OnDestroy() override;
@@ -56,6 +50,8 @@ namespace kiko {
 		Transform m_transform;
 		std::string m_tag;
 		float m_lifespan = -1.0f;
+		bool persistent = false;
+		bool protoype = false;
 
 	protected:
 		std::vector<std::unique_ptr<Component>> m_components;

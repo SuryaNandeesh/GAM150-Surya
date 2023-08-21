@@ -7,7 +7,7 @@ class Player : public kiko::Actor {
 public:
 
 	Player(float health, float speed, float turnRate, const kiko::Transform& transform, std::string tag) :
-		Actor{ transform, tag, health},
+		Actor{ transform },
 		m_speed{ speed },
 		m_turnRate{ turnRate }
 	{}

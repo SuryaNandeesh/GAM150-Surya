@@ -6,7 +6,7 @@ namespace kiko
 	class EnginePhysicsComponent : public PhysicsComponent
 	{
 	public:
-		CLASS_DEC(EnginePhysicsComponent)
+		CLASS_DECLARATION(EnginePhysicsComponent)
 
 		virtual void Update(float dt) override;
 

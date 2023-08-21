@@ -8,7 +8,9 @@ namespace kiko
 	class SpriteRenderComponent : public RenderComponent
 	{
 	public:
-		CLASS_DEC(SpriteRenderComponent)
+		CLASS_DECLARATION(SpriteRenderComponent);
+
+		bool Initialize() override;
 
 		void Update(float dt) override;
 		void Draw(class Renderer& renderer) override;

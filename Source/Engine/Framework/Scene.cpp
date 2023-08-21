@@ -4,7 +4,7 @@
 namespace kiko {
 	bool Scene::Initialize()
 	{
-		for (auto actor : m_actors) actor->Initialize();
+		for (auto& actor : m_actors) actor->Initialize();
 
 		return true;
 	}
@@ -14,9 +14,8 @@ namespace kiko {
 		auto iter = m_actors.begin();
 		while (iter != m_actors.end()) {
 
-			(*iter)->Update(dt);
-
-			( (*iter)->m_destroyed ) ? iter = m_actors.erase(iter) :  iter++;
+			if ((*iter)->active) (*iter)->Update(dt);
+			((*iter)->m_destroyed) ? iter = m_actors.erase(iter) : iter++;
 
 		}
 		//check collisions
@@ -29,7 +28,7 @@ namespace kiko {
 
 				if (!collision1 || !collision2) continue;
 
-				if (collision1->CheckCollision(collision2)){
+				if (collision1->CheckCollision(collision2)) {
 					(*iter1)->OnCollision(iter2->get());
 					(*iter2)->OnCollision(iter1->get());
 
@@ -38,13 +37,15 @@ namespace kiko {
 			}
 
 		}
-	
+
 	}
 
 	void Scene::Draw(Renderer& renderer) {
 
 		for (auto& actor : m_actors)
-			actor->Draw(renderer);
+		{
+			if (actor->active) actor->Draw(renderer);
+		}
 
 	}
 
@@ -55,9 +56,13 @@ namespace kiko {
 
 	}
 
-	void Scene::RemoveAll() {
+	void Scene::RemoveAll(bool force) {
 
-		m_actors.clear();
+		auto iter = m_actors.begin();
+		while (iter != m_actors.end())
+		{
+			(force || !(*iter)->persistent) ? iter = m_actors.erase(iter) : iter++;
+		}
 
 	}
 
@@ -76,16 +81,26 @@ namespace kiko {
 
 	void Scene::Read(const json_t& value)
 	{
-		// if(HAS_DATA(value, actors) && GET_DATA(value, actors).IsArray())
-		//{
-		//	for(auto & actorValue : GET_DATA(value, actors).GetArray())
-		//	{
-		//		std::string type;
-		//		READ_DATA(actorValue, type);
+		if (HAS_DATA(value, actors) && GET_DATA(value, actors).IsArray())
+		{
+			for (auto& actorValue : GET_DATA(value, actors).GetArray())
+			{
+				std::string type;
+				READ_DATA(actorValue, type);
 
-		//		auto actor
+				auto actor = CREATE_CLASS_BASE(Actor, type);
+				actor->Read(actorValue);
+
+				if (actor->protoype)
+				{
+					std::string name = actor->name;
+					Factory::Instance().RegisterPrototype(actor->name, std::move(actor));
+				}
+				else
+				{
+					Add(std::move(actor));
+				}
+			}
+		}
 	}
-
-
-
 }

@@ -24,7 +24,7 @@ void Enemy::Update(float dt) {
         data.damping = 0.5f;
         data.color = kiko::Color{ 1, (float)0.1, 0, 1 };
 
-        kiko::Transform transform{ m_transform.position, 0, 1 };
+        kiko::Transform transform{ this->m_transform.position, 0, 1 };
         auto emitter = std::make_unique<kiko::Emitter>(transform, data);
         emitter->SetLifespan(1.0f);
         m_scene->Add(std::move(emitter));
@@ -48,14 +48,14 @@ void Enemy::Update(float dt) {
     if (m_firetimer <= 0) {
 
         m_firetimer = m_firerate;
-        std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(
-            400.0f,
-            kiko::Transform{ m_transform.position, m_transform.rotation, 1 },
-            GetTag(),
-            10.0f,
-            2.0f
-        );
-        m_scene->Add(std::move(projectile));
+        //std::unique_ptr<kiko::Projectile> projectile = std::make_unique<kiko::Projectile>(
+        //    400.0f,
+        //    kiko::Transform{ m_transform.position, m_transform.rotation, 1 },
+        //    GetTag(),
+        //    10.0f,
+        //    2.0f
+        //);
+        //m_scene->Add(std::move(projectile));
 
     }
 

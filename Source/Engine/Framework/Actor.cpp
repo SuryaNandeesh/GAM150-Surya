@@ -6,7 +6,23 @@
 
 namespace kiko {
 
-	CLASS_DEF(Actor)
+	CLASS_DEFINITION(Actor)
+
+	Actor::Actor(const Actor& other)
+	{
+		name = other.name;
+		m_tag = other.m_tag;
+		m_lifespan = other.m_lifespan;
+		m_transform = other.m_transform;
+		m_scene = other.m_scene;
+		m_game = other.m_game;
+
+		for (auto& component : other.m_components)
+		{
+			auto cloneComponent = std::unique_ptr<Component>(dynamic_cast<Component*>(component->Clone().release()));
+			AddComponent(std::move(cloneComponent));
+		}
+	}
 
 	bool Actor::Initialize()
 	{
@@ -65,14 +81,16 @@ namespace kiko {
 		m_components.push_back(std::move(component));
 
 	}
-	bool Actor::Read(const json_t& value)
+	void Actor::Read(const json_t& value)
 	{
 		Object::Read(value);
 
 		READ_DATA(value, m_tag);
 		READ_DATA(value, m_lifespan);
+		READ_DATA(value, persistent);
+		READ_DATA(value, protoype);
 
-		if (HAS_DATA(value, m_transform)) m_transform.Read(GET_DATA(value, m_transform));
+		if (HAS_DATA(value, m_transform))  m_transform.Read(GET_DATA(value, m_transform));
 		if (HAS_DATA(value, m_components) && GET_DATA(value, m_components).IsArray())
 		{
 			for (auto& componentValue : GET_DATA(value, m_components).GetArray())

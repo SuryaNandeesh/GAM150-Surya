@@ -70,8 +70,8 @@ void SpaceGame::Update(float dt) {
         if (g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
         {
             m_state = eState::StateGame;
+            //m_scene->GetActorByName<kiko::Actor>("Background")->active;
         }
-        
 		break;
 
 	case SpaceGame::StateGame:

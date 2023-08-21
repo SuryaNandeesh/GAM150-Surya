@@ -4,11 +4,11 @@
 
 namespace kiko
 {
-	CLASS_DEF(ModelRenderComponent)
+	CLASS_DEFINITION(ModelRenderComponent)
 
 	bool ModelRenderComponent::Initialize()
 	{
-		if (!ModelName.empty()) m_model = GET_RESOURCE(Model, ModelName);
+		if (!ModelName.empty()) m_model = kiko::ResourceManager::Instance().Get<Model>(ModelName);
 
 		return true;
 	}

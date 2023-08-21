@@ -6,12 +6,10 @@ namespace kiko
 	class CollisionComponent : public Component
 	{
 	public:
-		virtual bool CheckCollision(CollisionComponent* collision);
-		// Inherited via Component
-		virtual void Update(float dt) override;
+		virtual bool CheckCollision(CollisionComponent* collision) = 0;
+		virtual void Update(float dt) = 0;
 
 	public:
 		float m_radius = 0;
-
 	};
 }

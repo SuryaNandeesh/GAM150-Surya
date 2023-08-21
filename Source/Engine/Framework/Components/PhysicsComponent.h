@@ -9,7 +9,8 @@ namespace kiko
 	public:
 		virtual void Update(float dt) = 0;
 		virtual void ApplyForce(const vec2& force) = 0;
-		CLASS_DEF(PhysicsComponent)
+		CLASS_DEFINITION(PhysicsComponent)
+
 	public:
 		vec2 m_velocity;
 		vec2 m_acceleration;

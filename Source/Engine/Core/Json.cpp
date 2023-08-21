@@ -68,7 +68,7 @@ namespace kiko
 
 	bool Json::Read(const rapidjson::Value& value, const std::string& name, float& data, bool required) {
 
-		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsFloat()) {
+		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsNumber()) {
 
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
@@ -83,7 +83,7 @@ namespace kiko
 	bool Json::Read(const rapidjson::Value& value, const std::string& name, vec2& data, bool required)
 	{
 		// check if 'name' member exists and is an array with 2 elements
-		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || !value[name.c_str()].Size() != 2)
+		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2)
 		{
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;

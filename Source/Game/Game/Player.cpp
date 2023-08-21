@@ -60,10 +60,20 @@ void Player::Update(float dt) {
     {
         dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::eState::PlayerDead);
     }
-
+    //fire weapon
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 
-        std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(
+        auto projectile = INSTANTIATE(Projectile, "Rocket");
+        projectile->m_transform = {m_transform.position, m_transform.rotation + kiko::DegToRad(180.0f)}; // problem here with proj = empty
+        projectile->Initialize();
+        m_scene->Add(std::move(projectile));
+
+        projectile = INSTANTIATE(Projectile, "Rocket");
+        projectile->m_transform = { m_transform.position, m_transform.rotation + kiko::DegToRad(180) };
+        projectile->Initialize();
+        m_scene->Add(std::move(projectile));
+
+       /* std::unique_ptr<Projectile> projectile = std::make_unique<Projectile>(
             400.0f, 
             kiko::Transform{m_transform.position, m_transform.rotation, 1.0f}, 
             GetTag(),
@@ -71,7 +81,7 @@ void Player::Update(float dt) {
             2.0f
             );
 
-        m_scene->Add(std::move(projectile));
+        m_scene->Add(std::move(projectile));*/
     
     }
 

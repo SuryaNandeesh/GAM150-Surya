@@ -97,7 +97,4 @@
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Framework.rc" />
-  </ItemGroup>
 </Project>

@@ -5,11 +5,15 @@
 namespace kiko
 {
 
-	CLASS_DEF(SpriteRenderComponent);
+	CLASS_DEFINITION(SpriteRenderComponent);
 
-	void kiko::SpriteRenderComponent::Initialize()
+	bool kiko::SpriteRenderComponent::Initialize()
 	{
-		//if()
+		//if (!textureName.empty()) {
+		//	m_texture = GET_RESOURCE(Texture, textureName, g_renderer)
+		//}
+
+		return true;
 	}
 
 	void kiko::SpriteRenderComponent::Update(float dt)

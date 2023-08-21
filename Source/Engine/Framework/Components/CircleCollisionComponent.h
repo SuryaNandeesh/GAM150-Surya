@@ -8,7 +8,8 @@ namespace kiko
 	class CircleCollisionComponent : public CollisionComponent
 	{
 	public:
-		CLASS_DEC(CircleCollisionComponent);
+		CLASS_DECLARATION(CircleCollisionComponent)
+
 		bool CheckCollision(CollisionComponent* collision) override;
 		inline void Update(float dt) override;
 	};

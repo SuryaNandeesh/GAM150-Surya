@@ -3,6 +3,8 @@
 
 namespace kiko
 {
+	CLASS_DEFINITION(EnginePhysicsComponent) 
+		
 	void kiko::EnginePhysicsComponent::Update(float dt)
 	{
 
