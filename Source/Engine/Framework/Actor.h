@@ -51,7 +51,7 @@ namespace kiko {
 		std::string m_tag;
 		float m_lifespan = -1.0f;
 		bool persistent = false;
-		bool protoype = false;
+		bool prototype = false;
 
 	protected:
 		std::vector<std::unique_ptr<Component>> m_components;

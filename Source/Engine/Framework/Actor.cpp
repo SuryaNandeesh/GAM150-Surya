@@ -88,7 +88,7 @@ namespace kiko {
 		READ_DATA(value, m_tag);
 		READ_DATA(value, m_lifespan);
 		READ_DATA(value, persistent);
-		READ_DATA(value, protoype);
+		READ_DATA(value, prototype);
 
 		if (HAS_DATA(value, m_transform))  m_transform.Read(GET_DATA(value, m_transform));
 		if (HAS_DATA(value, m_components) && GET_DATA(value, m_components).IsArray())

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <functional>
 #include "Core/Core.h"
 #include "SpaceGame.h"
 #include "Player.h"
@@ -26,9 +27,22 @@ void print_arg(int count, ...) {
     va_end(args);
 }
 
+union Data
+{
+    int i;
+    bool b;
+    char c[6];
+};
 
 
 int main(int argc, char* argv[]) {
+
+    Data data;
+    data.i = 0;
+    cout << data.i << endl;
+
+
+
 
     //kiko::Factory::Instance().Register<kiko::SpriteRenderComponent>("SpriteComponent");
 

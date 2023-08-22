@@ -64,12 +64,7 @@ void Player::Update(float dt) {
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 
         auto projectile = INSTANTIATE(Projectile, "Rocket");
-        projectile->m_transform = {m_transform.position, m_transform.rotation + kiko::DegToRad(180.0f)}; // problem here with proj = empty
-        projectile->Initialize();
-        m_scene->Add(std::move(projectile));
-
-        projectile = INSTANTIATE(Projectile, "Rocket");
-        projectile->m_transform = { m_transform.position, m_transform.rotation + kiko::DegToRad(180) };
+        projectile->m_transform = {m_transform.position, m_transform.rotation + kiko::DegToRad(180.0f)};
         projectile->Initialize();
         m_scene->Add(std::move(projectile));
 
@@ -89,5 +84,5 @@ void Player::Update(float dt) {
 
 void Player::OnCollision(Actor* other)
 {
-    // this was placed inside of the actor.cpp
+    // this was placed inside of the actor.cpp but i want to fix collin stupid code
 }

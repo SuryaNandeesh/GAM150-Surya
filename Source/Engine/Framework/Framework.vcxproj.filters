@@ -11,6 +11,9 @@
     <Filter Include="Source\Resource">
       <UniqueIdentifier>{87768cc2-c15b-42ac-a67d-e4afa3c5346e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Event">
+      <UniqueIdentifier>{af57e5e7-5253-47f3-aaa6-eeb1a1b333a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -70,6 +73,12 @@
     <ClInclude Include="Factory.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Source\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Source\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -95,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Source\Event</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

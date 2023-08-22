@@ -52,10 +52,13 @@ bool SpaceGame::Initialize() {
     m_scene->Load("scene.json");
     m_scene->Initialize();
 
+    //add events
+    kiko::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::OnAddPoints, this, std::placeholders::_1));
+    kiko::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&SpaceGame::OnPlayerDead, this, std::placeholders::_1));
+
 	return true;
 
 }
-
 
 void SpaceGame::Shutdown() {
     //empty
@@ -186,6 +189,17 @@ void SpaceGame::Draw(kiko::Renderer& renderer) {
     kiko::g_particleSystem.Draw(renderer);
     m_scoreText->Draw(g_renderer, 40, 20);
     m_livesText->Draw(g_renderer, 700, 20);
-    
+}
 
+
+
+void SpaceGame::OnAddPoints(const kiko::Event& event)
+{
+    m_score += std::get<int>(event.data);
+}
+
+void SpaceGame::OnPlayerDead(const kiko::Event& event)
+{
+    m_lives--;
+    m_state = eState::PlayerDead;
 }

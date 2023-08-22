@@ -1,0 +1,5 @@
+INFO: (49) Initializing the Engine...
+INFO: (99) Prototype Class registered: Rocket
+INFO: (18) Event subscribed: AddPoints
+INFO: (18) Event subscribed: OnPlayerDead
+INFO: (87) Class registered: Object

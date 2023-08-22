@@ -5,13 +5,17 @@
 #include "Projectile.h"
 #include "Framework/Scene.h"
 #include <memory>
+#include "Framework/Event/EventManager.h"
 
 void Enemy::Update(float dt) {
 
     if (m_health <= 0.0f) {
 
-        kiko::EmitterData data;
+        //add points
+        kiko::EventManager::Instance().DispatchEvent("AddPoints", 100);
 
+        // make explosion
+        kiko::EmitterData data;
         data.burst = true;
         data.burstCount = 100;
         data.spawnRate = 200;

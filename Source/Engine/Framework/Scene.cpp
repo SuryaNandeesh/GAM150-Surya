@@ -91,10 +91,10 @@ namespace kiko {
 				auto actor = CREATE_CLASS_BASE(Actor, type);
 				actor->Read(actorValue);
 
-				if (actor->protoype)
+				if (actor->prototype)
 				{
 					std::string name = actor->name;
-					Factory::Instance().RegisterPrototype(actor->name, std::move(actor));
+					Factory::Instance().RegisterPrototype(name, std::move(actor));
 				}
 				else
 				{
