@@ -13,6 +13,7 @@
 #include "Input/InputSystem.h"
 #include "Framework/Framework.h"
 #include "rapidjson/include/rapidjson/document.h"
+#include "Physics/PhysicsSystem.h"
 
 using namespace std;
 using namespace kiko;
@@ -27,19 +28,8 @@ void print_arg(int count, ...) {
     va_end(args);
 }
 
-union Data
-{
-    int i;
-    bool b;
-    char c[6];
-};
-
 
 int main(int argc, char* argv[]) {
-
-    Data data;
-    data.i = 0;
-    cout << data.i << endl;
 
 
 
@@ -48,6 +38,8 @@ int main(int argc, char* argv[]) {
 
     INFO_LOG("Initializing the Engine...");
     MemoryTracker::Initialize();
+
+    PhysicsSystem::Instance().Initialize();
 
     //seeds random to make it constantly randomizing
     seedRandom((unsigned int)time(nullptr));
