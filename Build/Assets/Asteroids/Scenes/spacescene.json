@@ -12,7 +12,7 @@
 			"components": [
 				{
 					"type": "SpriteRenderComponent",
-					"textureName": "space.png"
+					"textureName": "space_background.png"
 				}
 			]
 		},
@@ -100,7 +100,7 @@
 			"components": [
 				{
 					"type": "SpriteRenderComponent",
-					"textureName": "ship.png"
+					"textureName": "ship.jpg"
 				},
 				{
 					"type": "Box2DPhysicsComponent",
