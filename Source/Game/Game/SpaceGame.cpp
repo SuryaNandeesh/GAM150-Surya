@@ -29,11 +29,11 @@ bool SpaceGame::Initialize() {
 
 	m_scoreText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
 	//m_scoreText = std::make_unique<kiko::Text>(m_font);
-    m_scoreText->Create(kiko::g_renderer, "SCORE ", kiko::Color{ 28, 163, 39, 1 });
+    m_scoreText->Create(kiko::g_renderer, "SCORE 0000", kiko::Color{ 28, 163, 39, 1 });
 
     m_livesText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
     //m_livesText = std::make_unique<kiko::Text>(m_font);
-    m_livesText->Create(kiko::g_renderer, "LIVES ", kiko::Color{ 207, 34, 25, 1 });
+    m_livesText->Create(kiko::g_renderer, "LIVES 0", kiko::Color{ 207, 34, 25, 1 });
 
     m_titleText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
     //m_titleText = std::make_unique<kiko::Text>(m_font);
@@ -49,8 +49,9 @@ bool SpaceGame::Initialize() {
     
     //create scene
     m_scene = std::make_unique<Scene>();
-    m_scene->Load("scene.json");
+    m_scene->Load("scenes/spacescene.json");
     m_scene->Initialize();
+    //m_scene->SetGame(this);
 
     //add events
     kiko::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::OnAddPoints, this, std::placeholders::_1));
@@ -88,6 +89,11 @@ void SpaceGame::Update(float dt) {
 	case SpaceGame::StartLevel:
         //create ship
     {
+        auto player = INSTANTIATE(Player, "Player");
+        player->transform = kiko::Transform{ {400, 300}, 0, 3 };
+        player->Initialize();
+        m_scene->Add(std::move(player));
+        /*
         std::unique_ptr<Player> player = std::make_unique<Player>(
             100.0f,
             10.0f,
@@ -114,6 +120,7 @@ void SpaceGame::Update(float dt) {
 
         player->Initialize();
         m_scene->Add(std::move(player));
+        */
     }
 
         m_state = eState::Game;
@@ -128,7 +135,13 @@ void SpaceGame::Update(float dt) {
         if (m_spawnTimer >= m_spawnTime) {
 
             m_spawnTimer = 0;
+            auto enemy = INSTANTIATE(Enemy, "Enemy");
+            enemy->transform = kiko::Transform{ {400, 300}, 0, 3 };
+            enemy->Initialize();
+            m_scene->Add(std::move(enemy));
+
             //create enemy
+            /*
             m_scene->Add(std::make_unique <Enemy>(
                 20.0f,
                 randomf(10.0f, 20.0f),
@@ -139,6 +152,7 @@ void SpaceGame::Update(float dt) {
                 randomf(1.0f, 2.0f),
                 "Enemy"
                 ));
+                */
 
         }
         

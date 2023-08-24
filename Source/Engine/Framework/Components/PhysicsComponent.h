@@ -9,6 +9,8 @@ namespace kiko
 	public:
 		virtual void Update(float dt) = 0;
 		virtual void ApplyForce(const vec2& force) = 0;
+
+		virtual void SetVelocity(const vec2& velocity) { this->m_velocity = velocity; }
 		CLASS_DEFINITION(PhysicsComponent)
 
 	public:

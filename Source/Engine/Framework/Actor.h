@@ -16,7 +16,7 @@ namespace kiko {
 
 		Actor() = default;
 		Actor(const kiko::Transform& transform) :
-			m_transform{ transform }
+			transform{ transform }
 		{}
 		Actor(const Actor& other);
 
@@ -35,10 +35,10 @@ namespace kiko {
 		float GetRadius() { return 30; }
 		float GetHealth() { return m_health; }
 
-		std::string GetTag() { return m_tag; }
-		Transform GetTransform() { return m_transform; }
+		std::string GetTag() { return tag; }
+		Transform GetTransform() { return transform; }
 
-		void SetLifespan(float lifespan) { m_lifespan = lifespan; }
+		void SetLifespan(float lifespan) { lifespan = lifespan; }
 
 		virtual void Damage(float damage) { m_health -= damage; }
 
@@ -47,14 +47,14 @@ namespace kiko {
 
 		class Game* m_game = nullptr;
 
-		Transform m_transform;
-		std::string m_tag;
-		float m_lifespan = -1.0f;
+		Transform transform;
+		std::string tag;
+		float lifespan = -1.0f;
 		bool persistent = false;
 		bool prototype = false;
 
 	protected:
-		std::vector<std::unique_ptr<Component>> m_components;
+		std::vector<std::unique_ptr<Component>> components;
 
 		bool m_destroyed = false;
 		float m_health = -1.0f;
@@ -64,7 +64,7 @@ namespace kiko {
 	template<typename T>
 	inline T* Actor::GetComponent() {
 
-		for (auto& component : m_components) {
+		for (auto& component : components) {
 
 			T* result = dynamic_cast<T*> (component.get());
 			if (result) return result;

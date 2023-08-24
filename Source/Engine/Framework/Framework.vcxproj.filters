@@ -52,9 +52,6 @@
     <ClInclude Include="Resource\ResourceManager.h">
       <Filter>Source\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -78,6 +75,12 @@
     </ClInclude>
     <ClInclude Include="Event\EventManager.h">
       <Filter>Source\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TextRenderComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2DPhysicsCompoenent.h">
+      <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="Event\EventManager.cpp">
       <Filter>Source\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TextRenderComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2DPhysicsCompoenent.cpp">
+      <Filter>Source\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

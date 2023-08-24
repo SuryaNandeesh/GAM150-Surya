@@ -31,7 +31,9 @@ void print_arg(int count, ...) {
 
 int main(int argc, char* argv[]) {
 
-
+    //makes the text show up
+    //ON ----> m_scene->GetActorByName("Title")->active = true;
+    // OFF ---> m_scene->GetActorByName("Title")->active = false;
 
 
     //kiko::Factory::Instance().Register<kiko::SpriteRenderComponent>("SpriteComponent");
@@ -45,7 +47,7 @@ int main(int argc, char* argv[]) {
     seedRandom((unsigned int)time(nullptr));
 
     //file location
-    setFilePath("assets");
+    setFilePath("assets/asteroids");
     cout << getFilePath() << endl;
 
     //JSON - json.txt
@@ -67,6 +69,7 @@ int main(int argc, char* argv[]) {
 
     // create texture
     kiko::res_t<kiko::Texture> texture = GET_RESOURCE(kiko::Texture, "ship.png", kiko::g_renderer);
+    //kiko::res_t<kiko::Texture> texture = GET_RESOURCE(kiko::Texture, "space_background.png", kiko::g_renderer);
     //texture->Load("garflied.jpg", g_renderer);
 
     bool quit = false;

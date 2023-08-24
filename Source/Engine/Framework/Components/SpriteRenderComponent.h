@@ -8,7 +8,7 @@ namespace kiko
 	class SpriteRenderComponent : public RenderComponent
 	{
 	public:
-		CLASS_DECLARATION(SpriteRenderComponent);
+		CLASS_DECLARATION(SpriteRenderComponent)
 
 		bool Initialize() override;
 
@@ -18,6 +18,7 @@ namespace kiko
 		virtual float GetRadius() {return m_texture->GetSize().Length() * 0.5f;}
 
 	public:
+		std::string textureName;
 		res_t<Texture> m_texture;
 	};
 }
