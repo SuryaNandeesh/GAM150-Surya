@@ -16,17 +16,6 @@
 using namespace std;
 using namespace kiko;
 
-void print_arg(int count, ...) {
-    va_list args;
-    va_start(args, count);
-    for (int i = 0; i < count; ++i)
-    {
-        std::cout << va_arg(args, const char*) << std::endl;
-    }
-    va_end(args);
-}
-
-
 int main(int argc, char* argv[]) {
 
     INFO_LOG("Initializing the Engine...");
@@ -38,7 +27,7 @@ int main(int argc, char* argv[]) {
     seedRandom((unsigned int)time(nullptr));
 
     //file location
-    setFilePath("assets/asteroids");
+    setFilePath("assets/platformer");
     cout << getFilePath() << endl;
 
     //JSON - json.txt
@@ -47,7 +36,7 @@ int main(int argc, char* argv[]) {
 
     //creation of window
     g_renderer.Initialize();
-    g_renderer.CreateWindow("CSC196", 800, 600);
+    g_renderer.CreateWindow("GAM150", 800, 600);
 
     //creates input system
     g_inputSystem.Initialize();
@@ -56,11 +45,6 @@ int main(int argc, char* argv[]) {
     //creates the game itself
     unique_ptr<PlatformGame> game = make_unique<PlatformGame>();
     game->Initialize();
-
-    // create texture
-    kiko::res_t<kiko::Texture> texture = GET_RESOURCE(kiko::Texture, "ship.png", kiko::g_renderer);
-    //kiko::res_t<kiko::Texture> texture = GET_RESOURCE(kiko::Texture, "space_background.png", kiko::g_renderer);
-    //texture->Load("garflied.jpg", g_renderer);
 
     bool quit = false;
     while (!quit) {
@@ -72,12 +56,13 @@ int main(int argc, char* argv[]) {
         g_audioSystem.Update();
         g_inputSystem.Update();
 
+        //esc exits the game
         if (g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) quit = true;
 
+        //updates the game every tick
         game->Update(g_time.GetDeltaTime());
 
         /////// Drawing
-
         g_renderer.SetColor(0, 0, 0, 0);
         g_renderer.BeginFrame();
 

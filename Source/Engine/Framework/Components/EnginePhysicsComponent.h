@@ -11,6 +11,7 @@ namespace kiko
 		virtual void Update(float dt) override;
 
 		void ApplyForce(const vec2& force) override;
+		void ApplyTorque(float force) {}
 
 	};
 }

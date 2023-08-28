@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "Core/Vector2.h"
+#include "Core/Math/Vector2.h"
 
 namespace kiko
 {
@@ -9,6 +9,7 @@ namespace kiko
 	public:
 		virtual void Update(float dt) = 0;
 		virtual void ApplyForce(const vec2& force) = 0;
+		virtual void ApplyTorque(float force) = 0;
 
 		virtual void SetVelocity(const vec2& velocity) { this->m_velocity = velocity; }
 		CLASS_DEFINITION(PhysicsComponent)

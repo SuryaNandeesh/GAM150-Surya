@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2-2.28.1/include/SDL.h>
 #include "Font.h"
-#include "Core/Color.h"
+#include "Core/Math/Color.h"
 #include <string>
 #include <memory>
 

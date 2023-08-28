@@ -6,7 +6,7 @@ namespace kiko
 	class CollisionComponent : public Component
 	{
 	public:
-		virtual bool CheckCollision(CollisionComponent* collision) = 0;
+		virtual bool CheckCollision(CollisionComponent* collision) { return true; }
 		virtual void Update(float dt) = 0;
 
 	public:

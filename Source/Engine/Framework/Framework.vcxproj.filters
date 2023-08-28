@@ -79,7 +79,13 @@
     <ClInclude Include="Components\TextRenderComponent.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Box2DPhysicsCompoenent.h">
+    <ClInclude Include="Components\SpriteAnimationRenderComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Box2DCollisionComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Box2DPhysicsComponent.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,7 +120,13 @@
     <ClCompile Include="Components\TextRenderComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Box2DPhysicsCompoenent.cpp">
+    <ClCompile Include="Components\SpriteAnimationRenderComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Box2DCollisionComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Box2DPhysicsComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
   </ItemGroup>

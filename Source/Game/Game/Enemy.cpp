@@ -30,7 +30,7 @@ namespace kiko
             data.speedMin = 50;
             data.speedMax = 250;
             data.damping = 0.5f;
-            data.color = kiko::Color{ 1, (float)0.1, 0, 1 };
+            data.color = Color{ 1, (float)0.1, 0, 1 };
 
             kiko::Transform transform{ this->transform.position, 0, 1 };
             auto emitter = std::make_unique<kiko::Emitter>(transform, data);

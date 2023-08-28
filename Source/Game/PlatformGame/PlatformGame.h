@@ -32,12 +32,6 @@ public:
 private:
 
 	eState m_state = eState::Title;
-	float m_spawnTimer = 0.0f;
-	float m_spawnTime = 3.0f;
-
-	std::shared_ptr<kiko::Font> m_font;
-	std::shared_ptr<kiko::Text> m_scoreText;
-	std::shared_ptr<kiko::Text> m_livesText;
-	std::shared_ptr<kiko::Text> m_titleText;
-
+	float m_spawnTimer = 0;
+	float m_spawnTime = 0;
 };

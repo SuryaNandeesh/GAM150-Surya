@@ -136,7 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="Box2DPhysicsCompoenent.h" />
+    <ClInclude Include="Components\Box2DCollisionComponent.h" />
+    <ClInclude Include="Components\Box2DPhysicsComponent.h" />
     <ClInclude Include="Components\CircleCollisionComponent.h" />
     <ClInclude Include="Components\CollisionComponent.h" />
     <ClInclude Include="Components\Component.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Components\ModelRenderComponent.h" />
     <ClInclude Include="Components\PhysicsComponent.h" />
     <ClInclude Include="Components\RenderComponent.h" />
+    <ClInclude Include="Components\SpriteAnimationRenderComponent.h" />
     <ClInclude Include="Components\SpriteRenderComponent.h" />
     <ClInclude Include="Components\TextRenderComponent.h" />
     <ClInclude Include="Emitter.h" />
@@ -160,10 +162,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="Box2DPhysicsCompoenent.cpp" />
+    <ClCompile Include="Components\Box2DCollisionComponent.cpp" />
+    <ClCompile Include="Components\Box2DPhysicsComponent.cpp" />
     <ClCompile Include="Components\CircleCollisionComponent.cpp" />
     <ClCompile Include="Components\EnginePhysicsComponent.cpp" />
     <ClCompile Include="Components\ModelRenderComponent.cpp" />
+    <ClCompile Include="Components\SpriteAnimationRenderComponent.cpp" />
     <ClCompile Include="Components\SpriteRenderComponent.cpp" />
     <ClCompile Include="Components\TextRenderComponent.cpp" />
     <ClCompile Include="Emitter.cpp" />

@@ -1,8 +1,10 @@
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Actor.cpp
-C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Box2DPhysicsCompoenent.cpp
+C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\Box2DCollisionComponent.cpp
+C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\Box2DPhysicsComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\CircleCollisionComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\EnginePhysicsComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\ModelRenderComponent.cpp
+C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\SpriteAnimationRenderComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\SpriteRenderComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Components\TextRenderComponent.cpp
 C:\Users\suryn\Documents\Neumont stuff\1st yr\4th qtr\Introduction to Game Programming\GAM150-Surya\Source\Engine\Framework\Emitter.cpp

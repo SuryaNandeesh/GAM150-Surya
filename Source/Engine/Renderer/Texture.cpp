@@ -25,7 +25,7 @@ namespace kiko
 
 	bool Texture::Load(std::string filename, Renderer& renderer)
 	{
-		SDL_Surface* surface = IMG_Load("garflied.jpg");
+		SDL_Surface* surface = IMG_Load(filename.c_str());
 		if (!surface)
 		{
 			WARNING_LOG("Unable to load surface");

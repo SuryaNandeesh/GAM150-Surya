@@ -30,7 +30,8 @@
 					"type": "TextRenderComponent",
 					"fontName": "arcadeclassic.ttf",
 					"fontSize": 24,
-					"text": "ASTEROIDZ"
+					"text": "ASTEROIDZ",
+					"color":  [1, 0, 0, 1]
 				}
 			]
 		},

@@ -25,19 +25,19 @@ bool SpaceGame::Initialize() {
 
     //make font
     //m_font = std::make_shared<Font>("ARCADECLASSIC.ttf", 24);
-    m_font = GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24);
+    m_font = GET_RESOURCE(Font, "ARCADECLASSIC.ttf", 24);
 
-	m_scoreText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
+	m_scoreText = std::make_unique<Text>(GET_RESOURCE(Font, "ARCADECLASSIC.ttf", 24));
 	//m_scoreText = std::make_unique<kiko::Text>(m_font);
-    m_scoreText->Create(kiko::g_renderer, "SCORE 0000", kiko::Color{ 28, 163, 39, 1 });
+    m_scoreText->Create(g_renderer, "SCORE 0000", Color{ 28, 163, 39, 1 });
 
-    m_livesText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
+    m_livesText = std::make_unique<Text>(GET_RESOURCE(Font, "ARCADECLASSIC.ttf", 24));
     //m_livesText = std::make_unique<kiko::Text>(m_font);
-    m_livesText->Create(kiko::g_renderer, "LIVES 0", kiko::Color{ 207, 34, 25, 1 });
+    m_livesText->Create(g_renderer, "LIVES 0", Color{ 207, 34, 25, 1 });
 
-    m_titleText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "ARCADECLASSIC.ttf", 24));
+    m_titleText = std::make_unique<Text>(GET_RESOURCE(Font, "ARCADECLASSIC.ttf", 24));
     //m_titleText = std::make_unique<kiko::Text>(m_font);
-    m_titleText->Create(kiko::g_renderer, "ASTEROID", kiko::Color{ 1, 1, 1, 1 });
+    m_titleText->Create(g_renderer, "ASTEROID", Color{ 1, 1, 1, 1 });
 
     //audio bank
 	g_audioSystem.AddAudio("laser", "laser.wav");
@@ -45,7 +45,7 @@ bool SpaceGame::Initialize() {
 	g_audioSystem.AddAudio("Background Music", "08 Red Sun (Maniac Agenda Mix).mp3");
 	g_audioSystem.AddAudio("Low Health Music", "Critical Health.mp3");
 	g_audioSystem.AddAudio("gameover", "gameover.mp3");
-    kiko::g_audioSystem.Play("Background Music", true);
+    g_audioSystem.Play("Background Music", true);
     
     //create scene
     m_scene = std::make_unique<Scene>();
@@ -54,8 +54,8 @@ bool SpaceGame::Initialize() {
     //m_scene->SetGame(this);
 
     //add events
-    kiko::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::OnAddPoints, this, std::placeholders::_1));
-    kiko::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&SpaceGame::OnPlayerDead, this, std::placeholders::_1));
+    EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::OnAddPoints, this, std::placeholders::_1));
+    EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&SpaceGame::OnPlayerDead, this, std::placeholders::_1));
 
 	return true;
 
@@ -90,7 +90,7 @@ void SpaceGame::Update(float dt) {
         //create ship
     {
         auto player = INSTANTIATE(Player, "Player");
-        player->transform = kiko::Transform{ {400, 300}, 0, 3 };
+        player->transform = Transform{ {400, 300}, 0, 3 };
         player->Initialize();
         m_scene->Add(std::move(player));
         /*
@@ -136,7 +136,7 @@ void SpaceGame::Update(float dt) {
 
             m_spawnTimer = 0;
             auto enemy = INSTANTIATE(Enemy, "Enemy");
-            enemy->transform = kiko::Transform{ {400, 300}, 0, 3 };
+            enemy->transform = Transform{ {400, 300}, 0, 3 };
             enemy->Initialize();
             m_scene->Add(std::move(enemy));
 
@@ -188,7 +188,7 @@ void SpaceGame::Update(float dt) {
     m_livesText->Create(g_renderer, "Lives " + std::to_string(m_lives), { 207, 34, 25, 1 });
 
     m_scene->Update(dt);
-    kiko::g_particleSystem.Update(dt);
+    g_particleSystem.Update(dt);
     
 }
 
@@ -200,7 +200,7 @@ void SpaceGame::Draw(kiko::Renderer& renderer) {
     }
 
     m_scene->Draw(renderer);
-    kiko::g_particleSystem.Draw(renderer);
+    g_particleSystem.Draw(renderer);
     m_scoreText->Draw(g_renderer, 40, 20);
     m_livesText->Draw(g_renderer, 700, 20);
 }

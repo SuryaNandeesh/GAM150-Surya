@@ -21,16 +21,11 @@ bool PlatformGame::Initialize() {
 
 
     //audio bank
-    g_audioSystem.AddAudio("laser", "laser.wav");
-    g_audioSystem.AddAudio("death", "bwomp.wav");
-    g_audioSystem.AddAudio("Background Music", "08 Red Sun (Maniac Agenda Mix).mp3");
-    g_audioSystem.AddAudio("Low Health Music", "Critical Health.mp3");
-    g_audioSystem.AddAudio("gameover", "gameover.mp3");
-    kiko::g_audioSystem.Play("Background Music", true);
+    //kiko::g_audioSystem.Play("Background Music", true);
 
     //create scene
     m_scene = std::make_unique<Scene>();
-    m_scene->Load("scene/spacescene.json");
+    m_scene->Load("Scenes/platformscene.json");
     m_scene->Initialize();
     //m_scene->SetGame(this);
 
@@ -51,12 +46,12 @@ void PlatformGame::Update(float dt) {
     switch (m_state) {
 
     case PlatformGame::Title:
-
-        if (g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
-        {
-            m_state = eState::StateGame;
-            //m_scene->GetActorByName<kiko::Actor>("Background")->active;
-        }
+    {
+        auto actor = INSTANTIATE(Actor, "Crate");
+        actor->transform.position = { random(g_renderer.GetWidth(), 100) };
+        actor->Initialize();
+        m_scene->Add(std::move(actor));
+    }
         break;
 
     case PlatformGame::StateGame:
@@ -68,34 +63,19 @@ void PlatformGame::Update(float dt) {
         break;
 
     case PlatformGame::StartLevel:
-        //create ship
+        //create player
     {
-        //std::unique_ptr<Player> player = std::make_unique<Player>(
-        //    100.0f,
-        //    10.0f,
-        //    DegToRad(270.0f),
-        //    kiko::Transform{ {400, 300}, 0, 3 },
-        //    "Player"
-        //);
-        //player->m_game = this;
-        // create components
 
         auto renderComponent = CREATE_CLASS(SpriteRenderComponent);
-        renderComponent->m_texture = GET_RESOURCE(kiko::Texture, "ship.png", kiko::g_renderer);
-        //player->AddComponent(std::move(renderComponent));
+        renderComponent->m_texture = GET_RESOURCE(kiko::Texture, "player_idle.png", kiko::g_renderer);
 
         //physics
         auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
         physicsComponent->m_damping = 0.9f;
-        //player->AddComponent(std::move(physicsComponent));
 
         auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
         collisionComponent->m_radius = 30.0f;
-        //player->AddComponent(std::move(collisionComponent));
 
-
-        //player->Initialize();
-        //m_scene->Add(std::move(player));
     }
 
     m_state = eState::Game;
@@ -132,7 +112,6 @@ void PlatformGame::Update(float dt) {
             m_state = eState::StartLevel;
         }
         else if (m_lives == 2) {
-            g_audioSystem.Play("Low Health Music", false);
             m_state = eState::StartLevel;
         }
         else if (m_lives == 1) {
@@ -144,7 +123,6 @@ void PlatformGame::Update(float dt) {
 
     case PlatformGame::GameOver:
         if (m_state = eState::GameOver) {
-            g_audioSystem.Play("gameover", false);
             break;
         }
         break;
@@ -154,25 +132,14 @@ void PlatformGame::Update(float dt) {
 
     }
 
-    m_scoreText->Create(g_renderer, "Score " + std::to_string(m_score), { 28, 163, 39, 1 });
-    m_livesText->Create(g_renderer, "Lives " + std::to_string(m_lives), { 207, 34, 25, 1 });
-
     m_scene->Update(dt);
     kiko::g_particleSystem.Update(dt);
 
 }
 
 void PlatformGame::Draw(kiko::Renderer& renderer) {
-
-    if (m_state == eState::Title)
-    {
-        m_titleText->Draw(g_renderer, 350, 300);
-    }
-
     m_scene->Draw(renderer);
     kiko::g_particleSystem.Draw(renderer);
-    m_scoreText->Draw(g_renderer, 40, 20);
-    m_livesText->Draw(g_renderer, 700, 20);
 }
 
 
