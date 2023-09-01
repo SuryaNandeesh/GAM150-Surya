@@ -8,12 +8,9 @@ namespace kiko
 	public:
 		CLASS_DECLARATION(Player)
 
-			//Player(float health, float speed, float turnRate, const kiko::Transform& transform, std::string tag) :
-			//	Actor{ transform },
-			//	m_speed{ speed },
-			//	m_turnRate{ turnRate }
-			//{}
 		bool Initialize() override;
+		void OnDestroy() override;
+
 		void Update(float dt) override;
 		void OnCollisionEnter(Actor* other);
 		void OnCollisionExit(Actor* other);

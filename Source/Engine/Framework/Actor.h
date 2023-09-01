@@ -56,10 +56,10 @@ namespace kiko
 		bool persistent = false;
 		bool prototype = false;
 
+		bool m_destroyed = false;
 	protected:
 		std::vector<std::unique_ptr<Component>> components;
 
-		bool m_destroyed = false;
 		float m_health = -1.0f;
 
 	};

@@ -177,26 +177,6 @@
 		},
 		{
 			"type": "Actor",
-			"tag": "Ground",
-			"transform": {
-				"position": [
-					400,
-					520
-				]
-			},
-			"components": [
-				{
-					"type": "Box2DPhysicsComponent",
-					"isDynamic": false
-				},
-				{
-					"type": "Box2DCollisionComponent",
-					"size": [ 600, 20 ]
-				}
-			]
-		},
-		{
-			"type": "Actor",
 			"name": "Title",
 			"persistent": true,
 			"transform": {

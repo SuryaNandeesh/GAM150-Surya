@@ -1,12 +1,5 @@
-#include "Framework/Game.h"
 #include "PlatformGame.h"
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/SpriteRenderComponent.h"
-#include <Framework/Components/ModelRenderComponent.h>
-#include "Framework/Components/EnginePhysicsComponent.h"
-#include <Framework/Components/CircleCollisionComponent.h>
+#include "Framework/Framework.h"
 
 #include "Renderer/Renderer.h"
 #include "Renderer/ModelManager.h"
@@ -31,8 +24,9 @@ bool PlatformGame::Initialize() {
     //m_scene->SetGame(this);
 
     //add events
-    kiko::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&PlatformGame::OnAddPoints, this, std::placeholders::_1));
-    kiko::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&PlatformGame::OnPlayerDead, this, std::placeholders::_1));
+    EventManager::Instance().Subscribe("AddPoints", this, std::bind(&PlatformGame::OnAddPoints, this, std::placeholders::_1));
+    EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&PlatformGame::OnPlayerDead, this, std::placeholders::_1));
+    EventManager::Instance().Subscribe("OnCoinPickup", this, std::bind(&PlatformGame::OnPlayerDead, this, std::placeholders::_1));
 
     return true;
 
@@ -53,6 +47,13 @@ void PlatformGame::Update(float dt) {
         actor->Initialize();
         m_scene->Add(std::move(actor));
     }
+    {
+        auto actor = INSTANTIATE(Actor, "Enemy");
+        actor->transform.position = vec2{ random(0, g_renderer.GetWidth()), 0 };
+        actor->Initialize();
+        m_scene->Add(std::move(actor));
+    }
+    m_state = eState::StateGame;
         break;
 
     case PlatformGame::StateGame:
@@ -66,16 +67,6 @@ void PlatformGame::Update(float dt) {
     case PlatformGame::StartLevel:
         //create player
     {
-
-        auto renderComponent = CREATE_CLASS(SpriteRenderComponent);
-        renderComponent->m_texture = GET_RESOURCE(kiko::Texture, "player_idle.png", kiko::g_renderer);
-
-        //physics
-        auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
-        physicsComponent->m_damping = 0.9f;
-
-        auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
-        collisionComponent->m_radius = 30.0f;
 
     }
 
@@ -154,3 +145,5 @@ void PlatformGame::OnPlayerDead(const kiko::Event& event)
     m_lives--;
     m_state = eState::PlayerDead;
 }
+
+//later

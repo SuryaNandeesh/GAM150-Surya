@@ -31,6 +31,8 @@ namespace kiko
 		void SetSequence(const std::string& name, bool update = true);
 		void UpdateSource();
 
+		std::string GetSequenceName() { return m_sequence->name; }
+
 	public:
 		int frame = 0;
 		float frameTimer = 0;

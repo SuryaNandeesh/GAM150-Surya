@@ -34,8 +34,8 @@ namespace kiko
 	{
 		SpriteRenderComponent::Read(value);
 
-		// read in animation sequences
-		if (HAS_DATA(value, sequences) && GET_DATA(value, sequences).IsArray())
+			// read in animation sequences
+			if (HAS_DATA(value, sequences) && GET_DATA(value, sequences).IsArray())
 		{
 			for (auto& sequenceValue : GET_DATA(value, sequences).GetArray())
 			{

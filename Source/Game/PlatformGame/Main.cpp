@@ -30,10 +30,6 @@ int main(int argc, char* argv[]) {
     setFilePath("assets/platformer");
     cout << getFilePath() << endl;
 
-    //JSON - json.txt
-    rapidjson::Document document;
-    kiko::Json::Load("json.txt", document);
-
     //creation of window
     g_renderer.Initialize();
     g_renderer.CreateWindow("GAM150", 800, 600);
