@@ -109,12 +109,12 @@ namespace kiko {
         mat3 mx = transform.GetMatrix();
 
         vec2 size = texture->GetSize() * mx.GetScale();
-        SDL_Rect dest;
+        SDL_Rect dest{};
 
         vec2 position = mx.GetTranslation();
 
-        dest.x = (int)position.x - (size.x * .5);
-        dest.y = (int)position.y - (size.y * .5);
+        dest.x = (int)(position.x - (size.x * .5));
+        dest.y = (int)(position.y - (size.y * .5));
         dest.w = (int)size.x;
         dest.h = (int)size.y;
 
@@ -135,6 +135,27 @@ namespace kiko {
         dest.y = (int)(position.y - (size.y * 0.5f));
         dest.w = (int)size.x;
         dest.h = (int)size.y;
+
+        SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, RadToDeg(mx.GetRotation()), nullptr, SDL_FLIP_NONE);
+    }
+
+    void Renderer::DrawTexture(Texture* texture, const Rect& source, const Transform& transform, const vec2& origin, bool flipH)
+    {
+        mat3 mx = transform.GetMatrix();
+
+        vec2 position = mx.GetTranslation();
+        vec2 size = vec2{ source.w, source.h } *mx.GetScale();
+
+        SDL_Rect dest;
+
+        dest.x = (int)(position.x - (size.x * origin.x));
+        dest.y = (int)(position.y - (size.y * origin.y));
+        dest.w = (int)size.x;
+        dest.h = (int)size.y;
+
+        SDL_Point center {(int)(size.x * origin.x), (int)(size.y * origin.y)};
+
+        SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, RadToDeg(mx.GetRotation()), &center, (flipH) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
     }
 
 }

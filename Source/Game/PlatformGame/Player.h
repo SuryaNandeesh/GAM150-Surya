@@ -1,6 +1,5 @@
 #pragma once
-#include "Framework/Actor.h"
-#include "Framework/Components/PhysicsComponent.h"
+#include "Framework/Framework.h"
 
 namespace kiko
 {
@@ -25,6 +24,7 @@ namespace kiko
 		float jump = 0;
 		float groundCount = 0;
 
-		kiko::PhysicsComponent* m_physicsComponent = nullptr;
+		class PhysicsComponent* m_physicsComponent = nullptr;
+		class SpriteAnimationRenderComponent* m_spriteAnimationRenderComponent = nullptr;
 	};
 }

@@ -30,13 +30,15 @@ namespace kiko
 	}
 	void kiko::SpriteRenderComponent::Draw(Renderer& renderer)
 	{
-		renderer.DrawTexture(m_texture.get(), m_owner->transform.position.x, m_owner->transform.position.y, RadToDeg(m_owner->transform.rotation));
+		renderer.DrawTexture(m_texture.get(), source , m_owner->transform);
 	}
 
 	void SpriteRenderComponent::Read(const json_t& value)
 	{
 		READ_DATA(value, textureName);
 		READ_DATA(value, source);
+		READ_DATA(value, flipH);
+		READ_DATA(value, origin);
 	}
 
 }

@@ -32,6 +32,8 @@ namespace kiko
 	}
 	void SpriteAnimationRenderComponent::Read(const json_t& value)
 	{
+		SpriteRenderComponent::Read(value);
+
 		// read in animation sequences
 		if (HAS_DATA(value, sequences) && GET_DATA(value, sequences).IsArray())
 		{
@@ -62,7 +64,7 @@ namespace kiko
 		}
 	}
 
-	void SpriteAnimationRenderComponent::SetSequence(const std::string& name)
+	void SpriteAnimationRenderComponent::SetSequence(const std::string& name, bool update)
 	{
 		//prevent set sequence again
 		if (m_sequence && m_sequence->name == name) return;
@@ -77,6 +79,8 @@ namespace kiko
 			//reset frame information
 			frame = m_sequence->startFrame;
 			frameTimer = 1.0f / m_sequence->fps;
+
+			if (update) UpdateSource();
 		}
 	}
 

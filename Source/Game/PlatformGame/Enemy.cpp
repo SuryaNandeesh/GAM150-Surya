@@ -1,18 +1,16 @@
 #include "Enemy.h"
 #include "PlatformGame.h"
-#include "Framework/Scene.h"
+#include "Framework/Framework.h"
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/PhysicsComponent.h"
 #include "Renderer/Renderer.h"
 #include <memory>
-#include <Framework/Components/RenderComponent.h>
-#include <Framework/Components/CollisionComponent.h>
 #include "Player.h"
 
 namespace kiko
 {
+    CLASS_DEFINITION(Enemy)
+
     bool Enemy::Initialize()
     {
         Actor::Initialize();
@@ -26,12 +24,14 @@ namespace kiko
 
         Actor::Update(dt);
 
-        vec2 forward = vec2{ 1, 0 }.Rotate(transform.rotation);
-        Player* player = m_scene->GetActor <Player>();
+        kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(transform.rotation);
+        Player* player = m_scene->GetActor<Player>();
+
         if (player)
         {
             vec2 direction = player->transform.position - transform.position;
             //turns towards player
+            m_physicsComponent->ApplyForce(direction.Normalized() * m_speed);
             float turnAngle = vec2::SignedAngle(forward, direction.Normalized());
             m_physicsComponent->ApplyTorque(turnAngle);
 

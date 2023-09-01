@@ -20,6 +20,6 @@ namespace kiko
 
 	private:
 
-		SDL_Texture* m_texture = nullptr;
+		SDL_Texture* m_texture{};
 	};
 }

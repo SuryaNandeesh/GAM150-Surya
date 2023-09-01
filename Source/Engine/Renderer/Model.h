@@ -27,7 +27,7 @@ namespace kiko {
 	private:
 
 		std::vector<vec2> m_points;
-		float m_radius;
+		float m_radius{};
 		Color m_color;
 
 	};

@@ -1,0 +1,15 @@
+INFO: (21) Initializing the Engine...
+INFO: (87) Class registered: Object
+INFO: (99) Prototype Class registered: Coin
+INFO: (87) Class registered: Object
+INFO: (99) Prototype Class registered: Crate
+INFO: (87) Class registered: Object
+INFO: (87) Class registered: Object
+INFO: (99) Prototype Class registered: Enemy
+INFO: (87) Class registered: Object
+INFO: (87) Class registered: Object
+INFO: (99) Prototype Class registered: tile01
+INFO: (87) Class registered: Object
+INFO: (99) Prototype Class registered: tile02
+INFO: (18) Event subscribed: AddPoints
+INFO: (18) Event subscribed: OnPlayerDead

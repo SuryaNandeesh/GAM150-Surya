@@ -21,11 +21,12 @@ bool PlatformGame::Initialize() {
 
 
     //audio bank
-    //kiko::g_audioSystem.Play("Background Music", true);
+    //kiko::g_audioSystem.AddAudio("Background Music", "insertmusic.wav");
 
     //create scene
     m_scene = std::make_unique<Scene>();
     m_scene->Load("Scenes/platformscene.json");
+    m_scene->Load("Scenes/tilemap.json");
     m_scene->Initialize();
     //m_scene->SetGame(this);
 
@@ -48,7 +49,7 @@ void PlatformGame::Update(float dt) {
     case PlatformGame::Title:
     {
         auto actor = INSTANTIATE(Actor, "Crate");
-        actor->transform.position = { random(g_renderer.GetWidth(), 100) };
+        actor->transform.position = vec2{ random(g_renderer.GetWidth(), 100), 0};
         actor->Initialize();
         m_scene->Add(std::move(actor));
     }

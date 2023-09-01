@@ -32,8 +32,7 @@ namespace kiko {
 
 		auto collisionComponent = GetComponent<kiko::CollisionComponent>();
 		auto renderComponent = GetComponent<kiko::RenderComponent>();
-		if (collisionComponent && renderComponent)
-			collisionComponent->m_radius = renderComponent->GetRadius() * transform.scale;
+		if (collisionComponent && renderComponent) collisionComponent->m_radius = renderComponent->GetRadius() * transform.scale;
 
 		return true;
 	}

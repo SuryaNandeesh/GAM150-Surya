@@ -86,7 +86,7 @@ namespace kiko {
 				std::string type;
 				READ_DATA(actorValue, type);
 
-				auto actor = CREATE_CLASS_BASE(Actor, type);
+				auto actor = CREATE_CLASS_BASE(Actor, type)
 				actor->Read(actorValue);
 
 				if (actor->prototype)

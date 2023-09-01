@@ -13,8 +13,10 @@
 #include "Components/PhysicsComponent.h"
 #include "Components/RenderComponent.h"
 #include "Components/SpriteRenderComponent.h"
+#include "Components/SpriteAnimationRenderComponent.h"
 #include "Components/CollisionComponent.h"
 #include "Components/CircleCollisionComponent.h"
+#include "Components/TilemapComponent.h"
 
 #include "Resource/Resource.h"
 #include "Resource/ResourceManager.h"

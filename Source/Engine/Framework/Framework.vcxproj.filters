@@ -88,6 +88,9 @@
     <ClInclude Include="Components\Box2DPhysicsComponent.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Components\TilemapComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -127,6 +130,9 @@
       <Filter>Source\Component</Filter>
     </ClCompile>
     <ClCompile Include="Components\Box2DPhysicsComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TilemapComponent.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
   </ItemGroup>
